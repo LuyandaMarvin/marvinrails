@@ -11,8 +11,10 @@
 
             <div class="hidden md:flex flex-1 justify-center items-center space-x-6">
                 <%= link_to "Lessons", posts_path, class: "text-gray-700 hover:text-blue-600 font-medium transition" %>
-                <% if !current_user.subscribed? %>
-                    <%= link_to "Pricing", pricing_path, class: "text-gray-700 hover:text-blue-600 font-medium transition" %>
+                <% if current_user %>
+                    <% if !current_user.subscribed? %>
+                        <%= link_to "Pricing", pricing_path, class: "text-gray-700 hover:text-blue-600 font-medium transition" %>
+                    <% end %>
                 <% end %>
 
                 <div class="relative w-64 hidden lg:block">
