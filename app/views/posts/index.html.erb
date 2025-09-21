@@ -1,23 +1,33 @@
 <p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Posts" %>
 
-<div id="posts" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8 p-10">
-    <%= render partial: "post_list", locals: { posts: @posts } %>
-</div>
-
-<%= form_with url: posts_path, method: :get, local: true do %>
-    <div>
-        <label>
-            <%= radio_button_tag :category_id, nil, params[:category_id].blank? %>
-            All
+<div class="flex">
+  <!-- Sidebar Filters -->
+  <aside class="w-64 bg-gray-50 border-r border-gray-200 p-6">
+    <h2 class="text-lg font-semibold text-gray-900 mb-4">Filter by Category</h2>
+    <%= form_with url: posts_path, method: :get, local: true do %>
+      <div class="space-y-3">
+        <label class="flex items-center space-x-2">
+          <%= radio_button_tag :category_id, nil, params[:category_id].blank?, class: "text-indigo-600 focus:ring-indigo-500" %>
+          <span>All</span>
         </label>
         <% @categories.each do |category| %>
-          <label>
-            <%= radio_button_tag :category_id, category.id, params[:category_id].to_i == category.id %>
-            <%= category.name %>
+          <label class="flex items-center space-x-2">
+            <%= radio_button_tag :category_id, category.id, params[:category_id].to_i == category.id, class: "text-indigo-600 focus:ring-indigo-500" %>
+            <span><%= category.name %></span>
           </label>
         <% end %>
-        <%= submit_tag "Filter" %>
+      </div>
+      <div class="mt-6">
+        <%= submit_tag "Apply Filters", class: "w-full bg-indigo-600 text-white py-2 rounded-lg shadow hover:bg-indigo-700" %>
+      </div>
+    <% end %>
+  </aside>
+
+  <!-- Main Posts Grid -->
+  <main class="flex-1 p-10">
+    <div id="posts" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <%= render partial: "post_list", locals: { posts: @posts } %>
     </div>
-<% end %>
+  </main>
+</div>
