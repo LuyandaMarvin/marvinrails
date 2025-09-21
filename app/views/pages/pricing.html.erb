@@ -1,0 +1,78 @@
+<div class="max-w-4xl mx-auto px-6">
+    <h1 class="text-4xl font-bold text-center mb-6">Pricing</h1>
+    <p class="text-center text-gray-600 mb-12">
+        👑 Become a Pro member and unlock exclusive videos and Source Code access.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Monthly Plan -->
+        <div class="border border-blue-600 bg-blue-50 rounded-2xl shadow-md p-8 transition hover:shadow-xl">
+            <h2 class="text-2xl font-semibold mb-4">Monthly Plan</h2>
+
+            <div class="text-gray-600 mb-8">$15</div>
+
+            <ul class="space-y-2 text-sm text-gray-600">
+            </ul>
+
+            <% if current_user %>
+                <%= button_to "Start", create_checkout_session_path(plan: "monthly"), method: :post, data: { turbo: false }, 
+                class:"inline-block bg-blue-600 text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-blue-700" %>
+            <% else %>
+                <%= render partial: "users/start_button" %>
+            <% end %>
+        </div>
+
+        <!-- Yearly Plan -->
+        <div class="border rounded-2xl shadow-md p-8 transition hover:shadow-xl">
+            <h2 class="text-2xl font-semibold mb-4">Yearly Plan</h2>
+
+            <div class="text-gray-600 mb-8">
+                $150
+            </div>
+
+            <ul class="space-y-2 text-sm text-gray-600">
+            </ul>
+
+            <% if current_user %>
+                <%= button_to "Start", create_checkout_session_path(plan: "yearly"), method: :post, data: { turbo: false }, 
+                class:"inline-block bg-blue-600 text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-blue-700" %>
+            <% else %>
+                <%= render partial: "users/start_button" %>
+            <% end %>
+        </div>
+
+    </div>
+
+    <p class="text-xs text-gray-400 text-center mt-12">
+        🛡️ Cancel anytime. Secured by
+        <a href="/contact" class="underline text-blue-600">Stripe</a>
+    </p>
+
+
+    <ul class="space-y-4 text-sm text-gray-700">
+        <li class="flex items-start">
+            <span class="text-green-600 mr-2">✅</span>
+            <div>
+                <strong>Access source code</strong><br>
+                Get the complete source code for all episodes. No need to buy individuallly. 
+            </div>
+        </li>
+
+        <li class="flex items-start">
+            <span class="text-green-600 mr-2">✅</span>
+            <div>
+                <strong>Early access</strong><br>
+                Access free episodes before they are released to the public.
+            </div>
+        </li>
+
+        <li class="flex items-start">
+            <span class="text-green-600 mr-2">✅</span>
+            <div>
+                <strong>Ads free</strong><br>
+                No banners, tracking or whatever bs.
+            </div>
+        </li>
+    </ul>
+
+</div>

@@ -1,0 +1,42 @@
+<div class="space-y-6">
+    <!-- Headline and description -->
+    <div class="text-center">
+        <h2 class="text-2xl font-semibold mb-2 text-gray-900">Sign in to access PRO lessons</h2>
+        <p class="text-gray-600 text-sm max-w-sm mx-auto">
+            Access private repos, leave comments, create watch lists.
+        </p>
+    </div>
+
+    <!-- OAuth Button -->
+
+    <div class="flex flex-col gap-4">
+        <%= button_to user_github_omniauth_authorize_path, method: :post, data: { turbo: false },
+            class: "w-full flex items-center justify-center gap-3 border border-gray-300 rounded-md py-3 hover:bg-gray-100 transition text-gray-900" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"fill="currenColor"  viewBox="0 0 1024 1024">
+                <path d="M512 0C229.25 0 0 229.25 0 512c0 226.25 146.5 418.125 350.25 485.875 25.625 4.75 34.875-11.125 34.875-24.625 0-12.125-.5-43.75-.75-85.625-141.5 30.75-171.625-30.75-171.625-30.75-23.25-59-56.75-74.875-56.75-74.875-46.5-31.75 3.5-31.125 3.5-31.125 51.5 3.625 78.625 52.75 78.625 52.75 45.625 78.5 119.875 55.75 149.125 42.625 4.75-33.125 17.875-55.75 32.75-68.5-113.5-12.875-232.875-56.75-232.875-252.75 0-55.75 19.875-101.625 52.625-137.5-5.25-12.875-22.75-65 5-135.375 0 0 43 13 140.875 52.5 40.875-11.375 84.75-17 128.75-17.125 44 0 87.875 5.625 128.75 17.125 97.875-39.5 140.875-52.5 140.875-52.5 27.75 70.375 10.25 122.5-5 135.375 32.75 35.875 52.625 81.75 52.625 137.5 0 196.25-119.5 239.875-233.5 252.75 18.25 15.75 34.625 46.75 34.625 94.625 0 68.5-.75 123.625-.75 140.5 0 13.625 9.25 29.625 35 24.625C877.5 930.125 1024 738.25 1024 512 1024 229.25 794.75 0 512 0z"/>
+            </svg>
+            Sign in with Github
+        <% end %>
+    </div>
+
+    <div class="flex flex-col gap-4">
+        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false },
+        class: "w-full flex items-center justify-center gap-3 border border-gray-300 rounded-md py-3 hover:bg-gray-100 transition text-gray-900" do %>
+        <div class="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style="display: block">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.87-6.87C34.05 2.56 29.39 0 24 0 14.62 0 6.73 5.38 3.37 13.22l7.98 6.2C13.96 13.1 18.55 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.54-.14-2.69-.44-4.09H24v7.76h12.77c-.26 2.06-1.93 5.08-5.09 7.05l7.77 6.04c4.55-4.2 7.53-10.36 7.53-16.76z"/>
+                <path fill="#FBBC05" d="M10.53 24c0-1.54.14-2.69.44-4.09H24v7.76H11.23c.26 2.06 1.93 5.08 5.09 7.05L8.55 34c-4.55-4.2-7.53-10.36-7.53-16.76z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.91-2.14 15.88-5.81l-7.77-6.04c-2.16 1.97-5.09 3.16-8.11 3.16-5.45 0-10.04-3.6-11.69-8.55l-7.98 6.2C6.73 42.62 14.62 48 24 48z"/>
+                <path fill="none" d="M0 0h48v48H0z"/>
+            </svg>
+        </div>
+        Sign in with Google
+        <% end %>
+    </div>
+</div>
+
+<!-- Info note -->
+<p class="text-xs text-gray-500 mt-3 max-w-xs mx-auto text-center">
+    We collect your email address, name and username to create your account. We do not share your information with third parties.
+</p>

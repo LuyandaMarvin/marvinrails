@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Posts" %>
+
+<div id="posts" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8 p-10">
+    <%= render partial: "post_list", locals: { posts: @posts } %>
+</div>
+
+<%= form_with url: posts_path, method: :get, local: true do %>
+    <div>
+        <label>
+            <%= radio_button_tag :category_id, nil, params[:category_id].blank? %>
+            All
+        </label>
+        <% @categories.each do |category| %>
+          <label>
+            <%= radio_button_tag :category_id, category.id, params[:category_id].to_i == category.id %>
+            <%= category.name %>
+          </label>
+        <% end %>
+        <%= submit_tag "Filter" %>
+    </div>
+<% end %>

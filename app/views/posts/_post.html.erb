@@ -1,0 +1,34 @@
+<div id="<%= dom_id post %>">
+  <p>
+    <strong>Title:</strong>
+    <%= post.title %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= post.description %>
+  </p>
+
+  <strong>Categories:</strong>
+  <% if post.categories.any? %>
+    <%= post.categories.map(&:name).to_sentence %>
+  <% else %>
+    None
+  <% end %>
+
+  <p>
+    <strong>Thumbnail url:</strong>
+    <%= post.thumbnail_url %>
+  </p>
+
+  <p>
+    <strong>Video url:</strong>
+    <%= post.video_url %>
+  </p>
+
+  <p>
+    <strong>Pro:</strong>
+    <%= post.pro %>
+  </p>
+
+</div>

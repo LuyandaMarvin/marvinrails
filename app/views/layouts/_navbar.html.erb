@@ -1,0 +1,58 @@
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+
+            <!-- Logo -->
+            <div class="flex-shrink-0">
+                <%= link_to root_path, class: "text-2xl font-bold text-purple-900 tracking-tight hover:text-blue-600 transition" do %>
+                    Marvin <span class="text-gray-900">Rails</span>
+                <% end %>
+            </div>
+
+            <div class="hidden md:flex flex-1 justify-center items-center space-x-6">
+                <%= link_to "Lessons", posts_path, class: "text-gray-700 hover:text-blue-600 font-medium transition" %>
+                <% if !current_user.subscribed? %>
+                    <%= link_to "Pricing", pricing_path, class: "text-gray-700 hover:text-blue-600 font-medium transition" %>
+                <% end %>
+
+                <div class="relative w-64 hidden lg:block">
+                    <%= form_with url: posts_path, method: :get, local: true, data: { searchDelayValue: 300, controller: "search", turbo_frame: "posts"}, class: "w-full" do |f| %>
+                        <%= f.text_field :query, value: params[:query], placeholder: "Quick Search...", 
+                        autocomplete: "off",
+                        data: { action: "input->search#submit" },
+                        class: "w-full py-2 px-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition text-sm placeholder-gray-500" %>
+                        <svg class="absolute right-3 top-2.5 h-5 w-5 text-gray-400 pointer-event-none" 
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
+                        </svg>
+                    <% end %>
+                    <turbo-frame id="search_results" class="absolute z-50 bg-white shadow-lg rounded-md w-full mt-1 max-h-72 overflow-y-auto"></turbo-frame>
+                </div>
+
+                <!-- Right side (auth/search/simplefied on mobile) -->
+                <div class="flex items-center space-x-4 md:space-x-6">
+                <!-- Search icon small screens -->
+                    <div class="lg:hidden">
+                        <%= form_with url: posts_path, method: :get, local: true, data: { searchDelayValue: 300, controller: "search", turbo_frame: "posts" }, class: "relative" do |f| %>
+                            <%= f.text_field :query, value: params[:query], placeholder: "Search", autocomplete: "off",
+                                data: { action: "input->search#submit" },
+                                class: "w-32 sm:w-40 py-1.5 px-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition text-sm placeholder-gray-500" 
+                            %>
+                        <% end %>
+                    </div>
+
+                    <div x-data="{ open: false }" x-cloak class="relative">
+                        <% if user_signed_in? %>
+                            <%= link_to profile_path, class: "flex items-center focus:outline-none rounded-full border border-gray-300 hover:ring-2 hover:ring-blue-500 transition" do %>
+                                <%= image_tag (current_user.avatar_url || asset_path("user.png")), alt: "Profile", class: "w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover" %>
+                            <% end %>
+                        <% else %>
+                        <%= render partial: "users/start_button" %>
+                        <% end %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
